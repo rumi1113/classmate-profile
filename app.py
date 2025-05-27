@@ -47,13 +47,6 @@ def submit():
 
     return redirect('/')
 
-# 🔥 Render用に必要なポート設定
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
-
-
-
 @app.route('/detail/<student_id>')
 def detail(student_id):
     profile = None
@@ -68,8 +61,6 @@ def detail(student_id):
         return render_template('detail.html', profile=profile)
     else:
         return "プロフィールが見つかりません", 404
-
-
 
 @app.route('/search')
 def search():
@@ -87,3 +78,8 @@ def search():
                     matched.append(row)
 
     return render_template('index.html', profiles=matched)
+
+# 🔥 Render用に必要なポート設定（最後に置く！）
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
