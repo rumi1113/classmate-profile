@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プロフィール登録フォーム</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>プロフィールを登録する</h1>
+
+  <form action="/submit" method="POST" enctype="multipart/form-data">
+    <label>名前：<input type="text" name="name" required></label><br>
+    <label>学年：<input type="text" name="grade" required></label><br>
+    <label>学籍番号：<input type="text" name="student_id" required></label><br>
+    <label>趣味：<input type="text" name="hobby"></label><br>
+    <label>写真：<input type="file" name="photo"></label><br><br>
+    <button type="submit">送信</button>
+  </form>
+</body>
+</html>

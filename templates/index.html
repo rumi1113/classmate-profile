@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>クラスメイトプロフィール一覧</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>クラスメイトプロフィール一覧</h1>
+  <p><a href="/form">→ プロフィールを登録する</a></p>
+
+  <div class="card-grid">
+    {% for profile in profiles %}
+      <div class="card">
+        {% if profile[4] %}
+          <img src="{{ profile[4] }}" alt="プロフィール写真" class="profile-img">
+        {% endif %}
+        <h2>{{ profile[0] }}</h2>
+        <p>学年：{{ profile[1] }}</p>
+        <p>学籍番号：{{ profile[2] }}</p>
+        <p>趣味：{{ profile[3] }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
