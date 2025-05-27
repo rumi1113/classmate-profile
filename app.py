@@ -68,3 +68,22 @@ def detail(student_id):
         return render_template('detail.html', profile=profile)
     else:
         return "プロフィールが見つかりません", 404
+
+
+
+@app.route('/search')
+def search():
+    target_name = request.args.get('name', '').strip()
+    target_grade = request.args.get('grade', '').strip()
+    matched = []
+
+    if os.path.exists('profiles.csv'):
+        with open('profiles.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                name_match = target_name in row[0] if target_name else True
+                grade_match = row[1] == target_grade if target_grade else True
+                if name_match and grade_match:
+                    matched.append(row)
+
+    return render_template('index.html', profiles=matched)

@@ -6,7 +6,26 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>クラスメイトプロフィール一覧</h1>
+  <h1>プロフィール一覧</h1>
+
+  <!-- 🔍 検索バー -->
+  <div class="search-section">
+     <form action="/search" method="get" class="search-bar">
+       <span class="search-icon">🔍</span>
+       <input type="text" name="name" placeholder="名前で検索" value="{{ request.args.get('name', '') }}">
+       <button type="submit" style="display:none;"></button> <!-- Enterキーで送信可能 -->
+     </form>
+
+     <div class="filter-buttons">
+       <a href="/search?grade=1" class="filter-btn {% if request.args.get('grade') == '1' %}active{% endif %}">1年</a>
+       <a href="/search?grade=2" class="filter-btn {% if request.args.get('grade') == '2' %}active{% endif %}">2年</a>
+       <a href="/search?grade=3" class="filter-btn {% if request.args.get('grade') == '3' %}active{% endif %}">3年</a>
+       <a href="/search?grade=4" class="filter-btn {% if request.args.get('grade') == '4' %}active{% endif %}">4年</a>
+     </div>
+  </div>
+
+
+
   <p><a href="/form">→ プロフィールを登録する</a></p>
 
   <div class="card-grid">
@@ -19,6 +38,7 @@
         <p>学年：{{ profile[1] }}</p>
         <p>学籍番号：{{ profile[2] }}</p>
         <p>趣味：{{ profile[3] }}</p>
+        <p><a href="{{ url_for('detail', student_id=profile[2]) }}">→ 詳しく見る</a></p>
       </div>
     {% endfor %}
   </div>
