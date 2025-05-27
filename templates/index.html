@@ -38,7 +38,10 @@
         <p>学年：{{ profile[1] }}</p>
         <p>学籍番号：{{ profile[2] }}</p>
         <p>趣味：{{ profile[3] }}</p>
-        <p><a href="{{ url_for('detail', student_id=profile[2]) }}">→ 詳しく見る</a></p>
+        {% if profile[2] %}
+         <p><a href="{{ url_for('detail', student_id=profile[2]) }}">→ 詳しく見る</a></p>
+        {% endif %}
+
       </div>
     {% endfor %}
   </div>
