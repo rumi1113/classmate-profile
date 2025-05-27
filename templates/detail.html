@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ profile[0] }}さんのプロフィール</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>{{ profile[0] }}さんのプロフィール</h1>
+
+  <div class="card" style="max-width: 400px; margin: 0 auto;">
+    {% if profile[4] %}
+      <img src="{{ profile[4] }}" alt="プロフィール写真" class="profile-img">
+    {% endif %}
+    <p><strong>学年：</strong>{{ profile[1] }}</p>
+    <p><strong>学籍番号：</strong>{{ profile[2] }}</p>
+    <p><strong>趣味：</strong>{{ profile[3] }}</p>
+  </div>
+
+  <p style="text-align: center;"><a href="/">← 一覧に戻る</a></p>
+</body>
+</html>

@@ -51,3 +51,20 @@ def submit():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
+
+
+
+@app.route('/detail/<student_id>')
+def detail(student_id):
+    profile = None
+    if os.path.exists('profiles.csv'):
+        with open('profiles.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                if row[2] == student_id:  # 学籍番号で一致
+                    profile = row
+                    break
+    if profile:
+        return render_template('detail.html', profile=profile)
+    else:
+        return "プロフィールが見つかりません", 404

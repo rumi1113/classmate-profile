@@ -37,3 +37,17 @@ h1 {
     border-radius: 12px;
     margin-bottom: 10px;
 }
+
+.detail-button {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 14px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+.detail-button:hover {
+  background-color: #45a049;
+}
