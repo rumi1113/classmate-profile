@@ -6,27 +6,30 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>プロフィール一覧</h1>
+  <h1>クラスメイトプロフィール一覧</h1>
 
-  <!-- 🔍 検索バー -->
-  <div class="search-section">
-     <form action="/search" method="get" class="search-bar">
-       <span class="search-icon">🔍</span>
-       <input type="text" name="name" placeholder="名前で検索" value="{{ request.args.get('name', '') }}">
-       <button type="submit" style="display:none;"></button> <!-- Enterキーで送信可能 -->
-     </form>
-
-     <div class="filter-buttons">
-       <a href="/search?grade=1" class="filter-btn {% if request.args.get('grade') == '1' %}active{% endif %}">1年</a>
-       <a href="/search?grade=2" class="filter-btn {% if request.args.get('grade') == '2' %}active{% endif %}">2年</a>
-       <a href="/search?grade=3" class="filter-btn {% if request.args.get('grade') == '3' %}active{% endif %}">3年</a>
-       <a href="/search?grade=4" class="filter-btn {% if request.args.get('grade') == '4' %}active{% endif %}">4年</a>
-     </div>
+  <!-- 🔍 検索フォーム -->
+  <div class="search-section" style="text-align: center; margin-bottom: 30px;">
+    <form action="/search" method="get" class="search-bar" style="margin-bottom: 10px;">
+      <input type="text" name="name" placeholder="名前で検索" value="{{ request.args.get('name', '') }}" style="padding: 8px; width: 200px;">
+      <select name="grade">
+        <option value="">学年を選択</option>
+        <option value="1" {% if request.args.get('grade') == '1' %}selected{% endif %}>1年</option>
+        <option value="2" {% if request.args.get('grade') == '2' %}selected{% endif %}>2年</option>
+        <option value="3" {% if request.args.get('grade') == '3' %}selected{% endif %}>3年</option>
+        <option value="4" {% if request.args.get('grade') == '4' %}selected{% endif %}>4年</option>
+      </select>
+      <select name="gender">
+        <option value="">性別を選択</option>
+        <option value="男性" {% if request.args.get('gender') == '男性' %}selected{% endif %}>男性</option>
+        <option value="女性" {% if request.args.get('gender') == '女性' %}selected{% endif %}>女性</option>
+        <option value="不明" {% if request.args.get('gender') == '不明' %}selected{% endif %}>不明</option>
+      </select>
+      <button type="submit" style="padding: 8px 12px;">検索</button>
+    </form>
   </div>
 
-
-
-  <p><a href="/form">→ プロフィールを登録する</a></p>
+  <p style="text-align: center;"><a href="/form">→ プロフィールを登録する</a></p>
 
   <div class="card-grid">
     {% for profile in profiles %}
@@ -38,10 +41,7 @@
         <p>学年：{{ profile[1] }}</p>
         <p>学籍番号：{{ profile[2] }}</p>
         <p>趣味：{{ profile[3] }}</p>
-        {% if profile[2] %}
-         <p><a href="{{ url_for('detail', student_id=profile[2]) }}">→ 詳しく見る</a></p>
-        {% endif %}
-
+        <p><a href="{{ url_for('detail', student_id=profile[2]) }}">→ 詳しく見る</a></p>
       </div>
     {% endfor %}
   </div>
